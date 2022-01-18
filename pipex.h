@@ -9,4 +9,8 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
+void	execute_cmd(char *argv, char **envp);
+char	*find_path(char *cmd, char **envp);
+void	error(void);
+
 #endif
