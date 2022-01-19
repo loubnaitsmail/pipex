@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 09:29:13 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/20 10:49:20 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/19 19:04:15 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/19 19:04:38 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Ajoute l’élément ’new’ au début de la liste. */
 
 #include "libft.h"
 

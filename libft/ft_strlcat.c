@@ -3,39 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 14:49:15 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/17 10:15:29 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:43:17 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/12 17:45:08 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* The strlcat() function appends the NUL-terminated string src to the end of 
-dst. It will append at most size - strlen(dst) - 1 bytes, NUL-terminating the 
-result. */
-/* The strlcat() functions return the total length of the string they tried 
-to create that means the initial length of dst plus the length of src. */
-
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	size_t	n;
-	size_t	m;
-	size_t	p;
+	size_t	i;
+	size_t	y;
+	size_t	size_dest;
 
-	m = 0;
-	n = ft_strlen(dst);
-	p = ft_strlen(src);
-	if (size == 0)
-		return (p);
-	while ((src[m] != '\0') && ((n + m) < (size - 1)))
+	size_dest = ft_strlen(dest);
+	i = size_dest;
+	y = 0;
+	if (i < size)
 	{
-		dst[n + m] = src[m];
-		m++;
+		while (src[y] && i < size - 1)
+		{
+			dest[i] = src[y];
+			i++;
+			y++;
+		}
+		dest[i] = '\0';
 	}
-	dst[n + m] = '\0';
-	if (size > n)
-		return (n + p);
-	return (size + p);
+	if (size < size_dest)
+		return (size + ft_strlen(src));
+	else
+		return (size_dest + ft_strlen(src));
 }

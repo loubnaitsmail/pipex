@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 13:40:10 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/20 15:04:34 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/19 19:05:44 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/19 19:05:52 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Itère sur la list lst et applique la fonction f au contenu chaque élément. */
 
 #include "libft.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
 		f(lst->content);

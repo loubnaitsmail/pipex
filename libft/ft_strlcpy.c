@@ -3,37 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 13:31:38 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/11 14:40:33 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:44:32 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/12 17:27:59 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* The strlcpy() function copies up to size characters from the 
-NUL-terminated string src to dst, NUL-terminating the result. */
-/* The strlcpy() functions return the total length of the string 
-they tried to create. For strlcpy() that means the length of src. */
-
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t destsize)
 {
 	size_t	i;
+	size_t	lent;
 
 	i = 0;
-	if (!dst || !src)
-		return (0);
-	if (size > 0)
+	lent = 0;
+	while (src[i] && i + 1 < destsize)
 	{
-		while (src[i] && --size)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	while (src[i])
+		dest[i] = src[i];
 		i++;
-	return (i);
+	}
+	if (destsize > 0)
+		dest[i] = '\0';
+	while (src[lent])
+		lent++;
+	return (lent);
 }

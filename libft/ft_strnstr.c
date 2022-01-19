@@ -3,40 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/08 11:17:09 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/11 13:33:00 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:47:33 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/01 19:48:01 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* The strnstr() function locates the first occurrence of the null-terminated
-string little in the string big, where not more than len character are 
-searched. */
-/* If	little is an empty string, big is returned; if little occurs nowhere in
-big, NULL is returned; otherwise a pointer to the first	character of the first
-occurrence of little is returned. */
-
 #include "libft.h"
 
-char	*ft_strnstr(const char	*big, const char *little, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	if (little[i] == '\0')
-		return ((char *)big);
-	while (big[i] && i < len)
+	if (!*needle)
+		return ((char *)(haystack));
+	while (haystack[i] && i < len)
 	{
 		j = 0;
-		while (big[i + j] == little[j] && i + j < len)
+		if (haystack[i + j] == needle[j])
 		{
-			if (little[j + 1] == '\0')
-				return ((char *)big + i);
-			j++;
+			while (needle[j] && haystack[i + j] == needle[j] && i + j < len)
+				j++;
+			if (!needle[j])
+				return ((char *)(&haystack[i]));
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

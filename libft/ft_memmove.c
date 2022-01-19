@@ -3,37 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 10:37:42 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/11 14:09:50 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:31:51 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/12 17:26:29 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* La fonction memmove() copie n octets depuis la zone mémoire src vers la zone 
-mémoire dest. Les deux zones peuvent se chevaucher : la copie se passe comme 
-si les octets de src étaient d'abord copiés dans une zone temporaire qui ne 
-chevauche ni src ni dest, et les octets sont ensuite copiés de la zone 
-temporaire vers dest.  */
-/* La fonction memmove() renvoie un pointeur sur dest. */
-
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	ft_else(size_t i, size_t size, unsigned char *destination,
+		const unsigned char *source)
 {
-	size_t			i;
-	char			*str_dest;
-	char			*str_src;
-
-	str_dest = (char *)dest;
-	str_src = (char *)src;
-	i = 0;
-	if (str_dest > str_src)
+	i = size;
+	while (i > 0)
 	{
-		while (n--)
-			str_dest[n] = str_src[n];
+		i--;
+		destination[i] = source[i];
 	}
-	else if (str_dest < str_src)
-		ft_memcpy(dest, src, n);
+}
+
+void	*ft_memmove(void *dest, const void *src, size_t size)
+{
+	size_t				i;
+	unsigned char		*destination;
+	const unsigned char	*source;
+
+	if (!dest && !src)
+		return (NULL);
+	i = 0;
+	destination = (unsigned char *)dest;
+	source = (unsigned char *)src;
+	if (dest < src)
+	{
+		while (i < size)
+		{
+			destination[i] = source[i];
+			i++;
+		}
+	}
+	else
+		ft_else(i, size, destination, source);
 	return (dest);
 }

@@ -3,30 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 11:06:54 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/11 14:23:26 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:40:47 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/06 00:37:23 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* La fonction strchr() renvoie un pointeur sur la première occurrence du 
-caractère c dans la chaîne s. */
-/* La fonction strchr() renvoie un pointeur sur le caractère correspondant, 
-ou NULL si le caractère n'a pas été trouvé. */
 
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*str;
+	int	i;
 
-	str = (char *)s;
-	while (*str != c)
+	i = 0;
+	while (s[i])
 	{
-		if (*str == '\0')
-			return (NULL);
-		str++;
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
 	}
-	return (str);
+	if (s[i] == (char)c)
+		return ((char *)(s + i));
+	return (NULL);
 }

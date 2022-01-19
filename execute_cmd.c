@@ -8,7 +8,6 @@ void	error(void)
 
 char	*find_path(char *cmd, char **envp)
 {
-	printf("Find_path_cmd : %s\n", cmd);
 	char	**paths;
 	char	*path;
 	int		i;
@@ -23,7 +22,6 @@ char	*find_path(char *cmd, char **envp)
 	{
 		part_path = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(part_path, cmd);
-		printf("final_path = %s\n", path);
 		free(part_path);
 		if (access(path, F_OK) == 0)
 			return (path);
@@ -34,7 +32,6 @@ char	*find_path(char *cmd, char **envp)
 
 void	execute_cmd(char *argv, char **envp)
 {
-	printf("Execute_cmd : %s\n", argv);
 	char	**cmd;
 	char	*final_path;
 

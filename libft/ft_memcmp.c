@@ -3,36 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 11:49:42 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/12 16:49:27 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:30:11 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/01 20:17:02 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* La fonction memcmp() compare les n premiers octets des zones mémoire s1 et
-s2. Elle renvoie un entier inférieur, égal, ou supérieur à zéro, si s1 est
-respectivement inférieure, égale ou supérieur à s2.  */
-/* La fonction memcmp() renvoie un entier négatif, nul ou positif si les n
-premiers octets de s1 sont respectivement inférieurs, égaux ou supérieurs aux n
-premiers octets de s2.   */
 
 #include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned int	i;
-	unsigned char	*str_s1;
-	unsigned char	*str_s2;
+	size_t			i;
+	unsigned char	*s1_copy;
+	unsigned char	*s2_copy;
 
+	s1_copy = (unsigned char *)s1;
+	s2_copy = (unsigned char *)s2;
 	i = 0;
-	str_s1 = (unsigned char *)s1;
-	str_s2 = (unsigned char *)s2;
-	if (n == 0)
-		return (0);
-	while (str_s1[i] == str_s2[i] && i < n - 1)
+	while (i < n)
 	{
+		if (s1_copy[i] != s2_copy[i])
+			return (s1_copy[i] - s2_copy[i]);
 		i++;
 	}
-	return (str_s1[i] - str_s2[i]);
+	return (0);
 }

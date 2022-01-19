@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 10:50:12 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/07 11:03:34 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:50:49 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/01 19:51:17 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* toupper() convertit la lettre c en majuscule si c'est possible. */
-/* La valeur renvoyée est celle de la lettre convertie, ou bien c si la à
-conversion n'était pas possible. */
 
 #include "libft.h"
 
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
+		return (c - 32);
+	else
+		return (c);
 }

@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 10:19:52 by gcollet           #+#    #+#             */
-/*   Updated: 2021/07/28 14:09:52 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:32:52 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/12 17:18:43 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* La fonction memset() remplit les n premiers octets de la zone mémoire 
-pointée par s avec l'octet c. */
-/* La fonction memset() renvoie un pointeur sur la zone mémoire s. */
-
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *p, int value, size_t size)
 {
-	char	*str;
+	size_t			i;
+	unsigned char	*dest_p;
+	unsigned char	dest_value;
 
-	str = s;
-	while (n)
+	dest_p = p;
+	dest_value = value;
+	i = 0;
+	while (i < size)
 	{
-		*str = (unsigned char)c;
-		str++;
-		n--;
+		dest_p[i] = dest_value;
+		i++;
 	}
-	return (s);
+	return (p);
 }

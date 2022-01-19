@@ -1,19 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 11:42:29 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/13 13:20:08 by gcollet          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* Alloue (avec malloc) et retourne une nouvelle chaine, résultat de la 
-concaténation de s1 et s2. */
-/* La nouvelle chaine de caractères. NULL si l’allocation échoue. */
-
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)

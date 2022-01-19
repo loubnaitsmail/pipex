@@ -3,93 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 17:26:08 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/13 15:57:51 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:27:09 by litsmail          #+#    #+#             */
+/*   Updated: 2021/10/03 00:58:28 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Alloue (avec malloc) et retourne une chaine de caractères représentant 
-l’integer reçu en argument .Les nombres négatifs doivent être gérés. */
-/* La chaine de caractères représentant l’integer. NULL si l’allocation 
-échoue. */
-
 #include "libft.h"
 
-static	char	*ft_swap(char *tab, int size)
-{
-	int		temp;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = size - 1;
-	if (tab[i] == '-')
-		i++;
-	while (i < j)
-	{
-		temp = tab[i];
-		tab[i] = tab[j];
-		tab[j] = temp;
-		i++;
-		j--;
-	}
-	return (tab);
-}
-
-static	char	*ft_is_zero(char *tab)
+char	*ft_filltab(int size, long nbr, int n, char *result)
 {
 	int	i;
 
-	i = 0;
-	tab[i++] = '0';
-	tab[i] = '\0';
-	return (tab);
-}
-
-static	int	ft_len(int c)
-{
-	int	len;
-
-	len = 1;
-	if (c >= 0)
-		c *= -1;
-	else
-		len++;
-	while (c <= -10)
+	i = size - 1;
+	while (i > 0)
 	{
-		c /= 10;
-		len++;
+		result[i] = nbr % 10 + 48;
+		nbr /= 10;
+		i--;
 	}
-	return (len);
+	if (n < 0)
+		result[0] = '-';
+	else
+		result[0] = nbr + 48;
+	return (result);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*tab;
-	int		i;
-	long	l_n;
-	int		len;
+	char		*result;
+	int			size;
+	long long	tmp;
+	long long	nbr;
 
-	i = 0;
-	len = ft_len(n);
-	l_n = n;
-	tab = (char *)malloc(sizeof(char) * (len + 1));
-	if (!tab)
-		return (0);
-	if (l_n == 0)
-		return (ft_is_zero(tab));
-	if (l_n < 0)
+	nbr = n;
+	tmp = 10;
+	size = 1;
+	if (nbr < 0)
 	{
-		l_n = -l_n;
-		tab[i++] = '-';
+		nbr = -nbr;
+		size++;
 	}
-	while (l_n != 0)
+	while (tmp <= nbr)
 	{
-		tab[i++] = (l_n % 10) + '0';
-		l_n /= 10;
+		tmp *= 10;
+		size++;
 	}
-	tab [i] = '\0';
-	return (ft_swap (tab, ft_strlen(tab)));
+	result = (char *)malloc(sizeof(char) * (size + 1));
+	if (!result)
+		return (NULL);
+	result[size] = '\0';
+	return (ft_filltab(size, nbr, n, result));
 }

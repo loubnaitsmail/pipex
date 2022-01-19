@@ -3,30 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 11:18:02 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/13 13:17:42 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:31:11 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/12 17:14:46 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* La fonction memcpy() copie n octets depuis la zone mémoire src vers la zone
-mémoire dest. Les deux zones ne doivent pas se chevaucher. Si c'est le cas, 
-utilisez plutôt memmove(). */
-/* La fonction memcpy() renvoie un pointeur sur dest. */
-
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t size)
 {
 	size_t	i;
 
-	i = 0;
 	if (!dest && !src)
 		return (NULL);
-	while (i < n)
+	i = 0;
+	while (i < size)
 	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		((char *)dest)[i] = ((char *)src)[i];
 		i++;
 	}
 	return (dest);

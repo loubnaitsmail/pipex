@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 13:17:48 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/20 15:04:09 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/19 19:04:59 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/19 19:05:08 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Supprime et libère la mémoire de l’élément passé en paramètre, et de tous 
-les élements qui suivent, à l’aide de del et de free(3) Enfin, le pointeur 
-initial doit être mis à NULL. */
-
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
-{	
-	t_list	*temp;
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*old_lst;
 
-	if (lst == NULL)
+	if (!del)
 		return ;
 	while (*lst)
 	{
-		temp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		(*lst) = temp;
+		del((*lst)->content);
+		old_lst = *lst;
+		*lst = old_lst->next;
+		free(old_lst);
 	}
+	*lst = NULL;
 }

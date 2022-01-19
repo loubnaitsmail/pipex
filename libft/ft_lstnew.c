@@ -3,28 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 08:21:11 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/20 11:42:33 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/19 19:06:56 by litsmail          #+#    #+#             */
+/*   Updated: 2021/10/03 01:07:07 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Alloue (avec malloc) et renvoie un nouvel élément. La variable content est 
-initialisée à l’aide de la valeur du paramètre content. La variable ’next’ est
-initialisée à NULL. */
-/* Valeur de retour: Le nouvel element */
 
 #include "libft.h"
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*list;
+	t_list	*new;
 
-	list = malloc(sizeof(*list));
-	if (list == NULL)
+	new = malloc(sizeof(t_list));
+	if (!new)
 		return (NULL);
-	list->content = content;
-	list->next = NULL;
-	return (list);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

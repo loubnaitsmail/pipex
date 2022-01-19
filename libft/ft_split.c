@@ -3,104 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 14:59:30 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/13 15:11:03 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:38:47 by litsmail          #+#    #+#             */
+/*   Updated: 2021/10/03 01:02:33 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Alloue (avec malloc) et retourne un tableau de chaines de caracteres obtenu 
-en séparant ’s’ à l’aide du caractère ’c’, utilisé comme délimiteur. Le tableau
-doit être terminé par NULL. */
-/* Le tableau de nouvelles chaines de caractères, résultant du découpage. 
-NULL si l’allocation échoue. */
-
 #include "libft.h"
 
-static char	**ft_malloc_error(char **tab)
+static int	is_char(char current, char c)
 {
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
+	if (current == c)
+		return (1);
+	return (0);
 }
 
-static size_t	ft_nb_words(char const *s, char c)
+static int	count_words(char *str, char c)
 {
-	size_t	i;
-	size_t	nb_words;
+	int		words;
+	int		i;
 
-	if (!s[0])
-		return (0);
 	i = 0;
-	nb_words = 0;
-	while (s[i] && s[i] == c)
-		i++;
-	while (s[i])
+	words = 0;
+	while (str[i])
 	{
-		if (s[i] == c)
+		if (str[i] && is_char(str[i], c))
+			i++;
+		else if (str[i] && !is_char(str[i], c))
 		{
-			nb_words++;
-			while (s[i] && s[i] == c)
+			words++;
+			while (str[i] && !is_char(str[i], c))
 				i++;
-			continue ;
 		}
-		i++;
 	}
-	if (s[i - 1] != c)
-		nb_words++;
-	return (nb_words);
+	return (words);
 }
 
-static void	ft_get_next_word(char **next_word, size_t *next_word_len, char c)
+static char	*duplicate(char *str, int nbr_caracters)
 {
-	size_t	i;
+	int		i;
+	char	*dest;
 
-	*next_word += *next_word_len;
-	*next_word_len = 0;
 	i = 0;
-	while (**next_word && **next_word == c)
-		(*next_word)++;
-	while ((*next_word)[i])
+	dest = (char *)malloc(sizeof(char) * (nbr_caracters + 1));
+	if (!dest)
+		return (NULL);
+	while (str[i] && i < nbr_caracters)
 	{
-		if ((*next_word)[i] == c)
-			return ;
-		(*next_word_len)++;
+		dest[i] = str[i];
 		i++;
 	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+static char	**fill_tab(char **final_str, char *str, char c, int size)
+{
+	int		caracters;
+	int		count;
+	int		i;
+
+	i = 0;
+	count = 0;
+	while (count < size)
+	{
+		caracters = 0;
+		while (str[i] && is_char(str[i], c))
+			i++;
+		while (str[i] && !is_char(str[i], c))
+		{
+			caracters++;
+			i++;
+		}
+		final_str[count] = duplicate(&str[i - caracters], caracters);
+		count++;
+	}
+	return (final_str);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**tab;
-	char	*next_word;
-	size_t	next_word_len;
-	size_t	i;
+	int		words;
+	char	**final_str;
 
-	if (!s)
+	words = count_words((char *)s, c);
+	final_str = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!final_str)
 		return (NULL);
-	tab = (char **)malloc(sizeof(char *) * (ft_nb_words(s, c) + 1));
-	if (!tab)
-		return (NULL);
-	i = 0;
-	next_word = (char *)s;
-	next_word_len = 0;
-	while (i < ft_nb_words(s, c))
-	{
-		ft_get_next_word(&next_word, &next_word_len, c);
-		tab[i] = (char *)malloc(sizeof(char) * (next_word_len + 1));
-		if (!tab[i])
-			return (ft_malloc_error(tab));
-		ft_strlcpy(tab[i], next_word, next_word_len + 1);
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
+	final_str = fill_tab(final_str, (char *)s, c, words);
+	final_str[words] = 0;
+	return (final_str);
 }

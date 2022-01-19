@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 18:21:05 by litsmail          #+#    #+#             */
-/*   Updated: 2021/10/03 00:54:19 by litsmail         ###   ########.fr       */
+/*   Updated: 2021/01/21 17:07:07 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
 
-int	ft_atoi(const char *str)
-{
-	int			negatif;
-	long long	convert;
+# define GET_NEXT_LINE_H
+# include <unistd.h>
+# include <stdlib.h>
 
-	negatif = 1;
-	convert = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			negatif = -1;
-		str++;
-	}
-	while (*str && *str >= '0' && *str <= '9')
-	{
-		convert = convert * 10 + (*str - 48);
-		str++;
-	}
-	return ((int)(convert * negatif));
-}
+int		contain(char *str, char c);
+int		separate(char **line, char *save_buf, int index);
+int		read_last(char **line, char *save_buf);
+int		read_func(int fd, char **line, int res);
+int		get_next_line(const int fd, char **line);
+char	*ft_realloc(char *ptr, size_t new_size);
+char	*ft_strcpy(char *dest, char *src);
+size_t	ft_strlen(const char *src);
+char	*ft_strdup(const char *s1);
+char	*ft_memalloc(size_t n);
+char	*ft_strcat(char *dest, char *src);
+
+#endif

@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 10:48:37 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/20 11:07:54 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/19 19:06:08 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/19 19:06:15 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Renvoie le dernier élément de la liste. */
 
 #include "libft.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (lst)
-	{
-		while (lst->next)
-			lst = lst->next;
-	}
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
 	return (lst);
 }

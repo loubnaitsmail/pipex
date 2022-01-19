@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 11:01:32 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/11 12:00:30 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:35:48 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/01 20:19:48 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Écrit le caractère ’c’ sur le file descriptor donné. */
 
 #include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write (fd, &c, 1);
+	if (fd < 0)
+		return ;
+	write(fd, &c, 1);
 }

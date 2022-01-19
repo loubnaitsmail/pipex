@@ -3,36 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/08 12:51:40 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/13 16:40:52 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:41:44 by litsmail          #+#    #+#             */
+/*   Updated: 2021/10/03 01:08:23 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* La fonction strdup() renvoie un pointeur sur une nouvelle chaîne de 
-caractères qui est dupliquée depuis s. La mémoire occupée par cette nouvelle 
-chaîne est obtenue en appelant malloc(), et peut (doit) donc être libérée avec
-free().*/
-/* La fonction strdup() renvoie un pointeur sur la chaîne dupliquée, ou NULL
-s'il n'y avait pas assez de mémoire.  */
-
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s1)
 {
-	char	*tab;
+	char	*copy;
 	int		i;
 
 	i = 0;
-	tab = (char *)malloc(sizeof(*tab) * (ft_strlen(s) + 1));
-	if (!tab)
+	copy = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!copy)
 		return (NULL);
-	while (s[i])
+	while (s1[i])
 	{
-		tab[i] = s[i];
+		copy[i] = s1[i];
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	copy[i] = '\0';
+	return (copy);
 }

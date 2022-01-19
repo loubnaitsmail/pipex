@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 11:10:13 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/20 11:48:50 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/19 19:03:38 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/19 19:04:00 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Ajoute l’élément new à la fin de la liste. */
 
 #include "libft.h"
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	t_list	*temp;
+	t_list	*last;
 
-	if (*alst == NULL)
-		*alst = new;
-	else
+	if (!*alst)
 	{
-		temp = ft_lstlast(*(alst));
-		temp->next = new;
+		*alst = new;
+		return ;
 	}
+	last = ft_lstlast(*alst);
+	last->next = new;
 }

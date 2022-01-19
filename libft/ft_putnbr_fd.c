@@ -3,34 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 11:51:46 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/11 11:59:00 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/01 19:37:11 by litsmail          #+#    #+#             */
+/*   Updated: 2020/12/06 20:11:44 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Écrit l’integer ’n’ sur le file descriptor donné. */
 
 #include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long	i;
+	long long	nbr;
 
-	i = n;
-	if (i < 0)
+	nbr = n;
+	if (nbr < 0)
 	{
-		ft_putchar_fd('-', fd);
-		i = i * -1;
+		nbr *= -1;
+		write(fd, "-", 1);
 	}
-	if (i > 9)
-	{
-		ft_putnbr_fd(i / 10, fd);
-		ft_putnbr_fd(i % 10, fd);
-	}
-	else
-	{
-		ft_putchar_fd(i + 48, fd);
-	}
+	if (nbr >= 10)
+		ft_putnbr_fd((int)(nbr / 10), fd);
+	nbr = nbr % 10 + 48;
+	write(fd, &nbr, 1);
 }

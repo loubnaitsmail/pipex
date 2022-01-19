@@ -3,48 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcollet <gcollet@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: litsmail <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 13:50:09 by gcollet           #+#    #+#             */
-/*   Updated: 2021/05/20 15:16:58 by gcollet          ###   ########.fr       */
+/*   Created: 2020/12/19 19:06:25 by litsmail          #+#    #+#             */
+/*   Updated: 2021/10/03 01:04:44 by litsmail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Itère sur la liste lst et applique la fonction f au contenu de chaque 
-élément. Crée une nouvelle liste résultant des applications successives de f. 
-La fonction del est la pour detruire le contenu d un element si necessaire */
-
 #include "libft.h"
-
-static	t_list	*ft_newlst(t_list *new_lst, t_list *lst, void *(*f)(void *)
-							, void (*del)(void *))
-{
-	t_list	*add;
-
-	add = ft_lstnew(f(lst->content));
-	if (add == NULL)
-	{
-		ft_lstclear(&new_lst, del);
-		return (NULL);
-	}
-	ft_lstadd_back(&new_lst, add);
-	return (new_lst);
-}
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
+	t_list	*lst_final;
+	t_list	*lst_tmp;
 
-	if (lst == NULL)
+	if (!f || !lst)
 		return (NULL);
-	new_lst = ft_lstnew(f(lst->content));
-	if (new_lst == NULL)
+	lst_final = ft_lstnew(f(lst->content));
+	if (!lst_final)
+	{
+		ft_lstclear(&lst, del);
 		return (NULL);
+	}
 	lst = lst->next;
 	while (lst)
 	{
-		ft_newlst(new_lst, lst, f, del);
+		lst_tmp = ft_lstnew(f(lst->content));
+		if (!lst_tmp)
+		{
+			ft_lstclear(&lst, del);
+			ft_lstclear(&lst_final, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&lst_final, lst_tmp);
 		lst = lst->next;
 	}
-	return (new_lst);
+	return (lst_final);
 }
